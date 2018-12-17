@@ -120,6 +120,8 @@ public class Game {
             }
         }   
         
+        //A method to handle users putting the wrong input in
+        
        
         
     }

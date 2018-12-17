@@ -65,7 +65,7 @@ public class Game {
     }
     
     public String inputLetter() {
-        System.out.println("Guess a letter:");
+        System.out.println("\nGuess a letter:");
         //Create a scanner to get user's guess.
         Scanner scan = new Scanner(System.in);
         //Store user guess for processing
@@ -104,23 +104,41 @@ public class Game {
         
         while(!gameOver) {
             // Obscure the title
-            System.out.println(obscureTitle(movie, correctLetters));
-
-
-            // Get a user guess
-            String guess = inputLetter();
-            //Check to see if the users guess is in the title
-            if(checkGuess(movie, guess)) {
-                correctLetters += guess;
-                System.out.println("Correct!");
+            String obMov = obscureTitle(movie, correctLetters);
+            System.out.println("Movie title:");
+            System.out.println(obMov);
+            if(!obMov.contains("_")){
+                gameOver = true;
+                System.out.println("You guess the whole movie! Way to go!");
             } else {
-                wrongLetters += guess;
-                System.out.println("Sorry, try again!");
-                livesLeft--;
+
+                // Get a user guess
+                String guess = inputLetter();
+                //Check to see if the users guess is in the title
+                if(checkGuess(movie, guess)) {
+                    correctLetters += guess;
+                    if(correctLetters.contains(guess)) {
+                        System.out.println("You already guessed that!");
+                    } else {
+                        System.out.println("Correct!");
+                    }
+                } else {
+                    wrongLetters += guess;
+                    System.out.println("Sorry, try again!");
+                    livesLeft--;
+                    System.out.println("You have " + livesLeft + " lives left.");
+                    if(livesLeft == 0){
+                        gameOver = true;
+                        System.out.println("You're out of lives! Game over!");
+                        System.out.println("The movie was \"" + movie + "\"!");
+                    }
+                }
             }
         }   
         
-        //A method to handle users putting the wrong input in
+        
+        
+ 
         
        
         
